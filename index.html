@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Hearts Scorer">
+    
+    <!-- iOS home screen icons -->
+    <link rel="apple-touch-icon" href="images/hearts-icon.svg">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/hearts-icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/hearts-icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/hearts-icon-167.png">
+    
+    <!-- iOS splash screens -->
+    <link rel="apple-touch-startup-image" href="images/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-1668x2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    
+    <link rel="manifest" href="manifest.json">
+    <title>Hearts Score Tracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Hearts Score Tracker</h1>
+        </header>
+        
+        <main>
+            <section id="player-setup" class="screen active">
+                <h2>Player Setup</h2>
+                <div class="player-inputs">
+                    <div class="input-group">
+                        <label for="num-players">Number of Players:</label>
+                        <select id="num-players">
+                            <option value="3">3 Players</option>
+                            <option value="4" selected>4 Players</option>
+                            <option value="5">5 Players</option>
+                            <option value="6">6 Players</option>
+                        </select>
+                    </div>
+                    <div id="player-names-container">
+                        <div class="player-name">
+                            <label for="player1">Player 1:</label>
+                            <input type="text" id="player1" placeholder="Name">
+                        </div>
+                        <div class="player-name">
+                            <label for="player2">Player 2:</label>
+                            <input type="text" id="player2" placeholder="Name">
+                        </div>
+                        <div class="player-name">
+                            <label for="player3">Player 3:</label>
+                            <input type="text" id="player3" placeholder="Name">
+                        </div>
+                        <div class="player-name">
+                            <label for="player4">Player 4:</label>
+                            <input type="text" id="player4" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="game-options">
+                        <div class="input-group">
+                            <label for="max-score">Play to score:</label>
+                            <input type="number" id="max-score" value="100" min="1">
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="shooting-moon" checked>
+                            <label for="shooting-moon">Enable shooting the moon</label>
+                        </div>
+                    </div>
+                    <button id="start-game" class="btn btn-primary">Start Game</button>
+                </div>
+            </section>
+
+            <section id="game-play" class="screen">
+                <h2>Round <span id="current-round">1</span></h2>
+                <div class="score-table-container">
+                    <table id="score-table">
+                        <thead>
+                            <tr id="player-header-row">
+                                <th>Round</th>
+                                <!-- Player headers will be inserted here -->
+                            </tr>
+                        </thead>
+                        <tbody id="score-body">
+                            <!-- Score rows will be inserted here -->
+                        </tbody>
+                        <tfoot>
+                            <tr id="total-row">
+                                <th>Total</th>
+                                <!-- Total cells will be inserted here -->
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div id="round-input" class="hidden">
+                    <h3>Enter points for round <span id="input-round-num">1</span></h3>
+                    <div id="round-score-inputs">
+                        <!-- Round score inputs will be inserted here -->
+                    </div>
+                    <button id="save-round" class="btn btn-primary">Save Round</button>
+                </div>
+
+                <div class="game-controls">
+                    <button id="new-round" class="btn">New Round</button>
+                    <button id="undo-round" class="btn btn-secondary">Undo Last Round</button>
+                    <button id="reset-game" class="btn btn-danger">Reset Game</button>
+                </div>
+            </section>
+
+            <section id="game-over" class="screen">
+                <h2>Game Over</h2>
+                <div id="final-results">
+                    <!-- Final results will be displayed here -->
+                </div>
+                <div class="winner-display">
+                    <h3>Winner: <span id="winner-name"></span></h3>
+                    <div id="winner-animation"></div>
+                </div>
+                <button id="new-game" class="btn btn-primary">New Game</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Hearts Score Tracker</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

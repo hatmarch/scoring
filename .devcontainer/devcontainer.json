@@ -1,0 +1,32 @@
+{
+  "name": "Hearts Score Tracker",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "appPort": ["8080:8080"],
+  "runArgs": [
+    // use local .oh-my-zsh configuration if it exists (overwriting one in container).
+    // comment the following line out if you want to use local installation on container instead
+    "-v",
+    "${env:HOME}/.oh-my-zsh:/home/node/.oh-my-zsh"
+    // // mount the workspace repository to ~/work in container
+    // "-v", "${localWorkspaceFolder}:/home/node/work",
+  ],
+  "forwardPorts": [8080],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ritwickdey.liveserver",
+        "ms-vscode.live-server"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "liveServer.settings.port": 5500
+      }
+    }
+  },
+  "postCreateCommand": "echo 'Container is ready!'",
+  "remoteUser": "node"
+}
